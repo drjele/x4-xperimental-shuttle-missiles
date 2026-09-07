@@ -14,7 +14,7 @@
     <add sel="//component[@name='ship_ter_s_xperimental_01']/connections/connection[@name='con_missilelauncher_01']" pos="after">
         <connection name="con_missilelauncher_02" tags="advanced missile small weapon ">
             <offset>
-                <position x="3.66873" y="1.000061" z="6.772886" />
+                <position x="3.66873" y="1.000061" z="6.772886"/>
             </offset>
         </connection>
     </add>

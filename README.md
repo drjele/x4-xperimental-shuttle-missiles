@@ -33,11 +33,11 @@ Restart X4 after installing or updating. To remove the manual installation:
 
 ## What it changes
 
-| | Stock | With this mod |
-|---|---|---|
-| Missile mounts | 1 | 2 |
-| Ship magazine | 0 | 80 |
-| **Total missiles** | **10** | **100** |
+|                    | Stock  | With this mod |
+|--------------------|--------|---------------|
+| Missile mounts     | 1      | 2             |
+| Ship magazine      | 0      | 80            |
+| **Total missiles** | **10** | **100**       |
 
 Both mounts take any small missile launcher, independently — you can put a guided launcher on one and a dumbfire on the other.
 
@@ -46,10 +46,11 @@ Both mounts take any small missile launcher, independently — you can put a gui
 A missile mount in X4 is not geometry. This is the whole of the vanilla one, in the Timelines copy of `assets/units/size_s/ship_ter_s_xperimental_01.xml`:
 
 ```xml
+
 <connection name="con_missilelauncher_01" tags="advanced missile small weapon ">
-  <offset>
-    <position x="-3.66873" y="1.000061" z="6.772886" />
-  </offset>
+    <offset>
+        <position x="-3.66873" y="1.000061" z="6.772886"/>
+    </offset>
 </connection>
 ```
 
@@ -62,8 +63,9 @@ So the second mount is one more `<connection>` at the mirrored coordinate. Posit
 Not from the ship. `ship_ter_s_xperimental_01_a_macro` declares `<storage missile="0" />`. The launcher macro declares the capacity instead:
 
 ```xml
+
 <macro name="weapon_gen_s_guided_02_mk1_macro" class="missilelauncher">
-  <storage capacity="10" />
+    <storage capacity="10"/>
 ```
 
 and the game adds the two together. `menu_ship_configuration.lua` walks every weapon and turret slot and adds that slot's macro capacity to the ship's base:
@@ -83,6 +85,7 @@ There is no in-game menu, and there cannot be one. A missile magazine is a macro
 So the number lives in the patch. One line, in `extension/extensions/ego_dlc_timelines/assets/units/size_s/macros/ship_ter_s_xperimental_01_a_macro.xml`:
 
 ```xml
+
 <replace sel="//macro[@name='ship_ter_s_xperimental_01_a_macro']/properties/storage/@missile">80</replace>
 ```
 
@@ -95,8 +98,9 @@ To keep the second mount but nothing else, delete the macro patch file. To keep 
 Because that is where the game looks. Timelines' `index/components.xml` maps the component to a path that carries the DLC prefix:
 
 ```xml
+
 <entry name="ship_ter_s_xperimental_01"
-       value="extensions\ego_dlc_timelines\assets\units\size_s\ship_ter_s_xperimental_01" />
+       value="extensions\ego_dlc_timelines\assets\units\size_s\ship_ter_s_xperimental_01"/>
 ```
 
 and `index/macros.xml` does the same for the macro. A patch placed at the plain `assets/units/...` path inside a mod therefore targets a **base game** file — which for a DLC-only ship does not exist. The patch is then applied to nothing.
