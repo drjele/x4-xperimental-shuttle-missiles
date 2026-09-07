@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<diff>
+
+    <!-- Mirror of con_missilelauncher_01, which sits at x=-3.66873. The vanilla mount carries no
+         <parts>, so it is a bare point in space with no geometry attached - which is why a second
+         one needs no change to the ship model. Positive x is the opposite side: con_weapon_01..03
+         are tagged symmetry_left at negative x, con_weapon_04..06 symmetry_right at positive x.
+         No symmetry tags here, matching the vanilla launcher, so the two stay independent slots.
+
+         This file sits under extensions/ego_dlc_timelines/ because that is the virtual path the game
+         loads the component from - index/components.xml maps ship_ter_s_xperimental_01 to
+         extensions\ego_dlc_timelines\assets\units\size_s\ship_ter_s_xperimental_01. A patch at the
+         plain assets/ path targets a base-game file that does not exist and is silently ignored. -->
+    <add sel="//component[@name='ship_ter_s_xperimental_01']/connections/connection[@name='con_missilelauncher_01']" pos="after">
+        <connection name="con_missilelauncher_02" tags="advanced missile small weapon ">
+            <offset>
+                <position x="3.66873" y="1.000061" z="6.772886" />
+            </offset>
+        </connection>
+    </add>
+
+</diff>

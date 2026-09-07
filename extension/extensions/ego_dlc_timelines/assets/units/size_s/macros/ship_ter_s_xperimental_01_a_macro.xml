@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<diff>
+
+    <!-- The ship's own missile magazine. Vanilla is 0: every missile the shuttle carries comes from
+         the launcher, whose macro declares <storage capacity="10"/>. The game adds the two up -
+         menu_ship_configuration.lua walks each weapon and turret slot and adds that slot's macro
+         capacity to the ship's base - so with the second mount from ship_ter_s_xperimental_01.xml
+         the total is this number plus 20.
+
+         80 here means 100 in total. Lower it to taste and reload; macros are re-read on every
+         savegame load, so no new game is needed. 0 restores the vanilla magazine, leaving only the
+         20 the two launchers provide.
+
+         Under extensions/ego_dlc_timelines/ for the same reason as the component patch next to it:
+         index/macros.xml resolves the macro to the DLC path, not to a base-game one. -->
+    <replace sel="//macro[@name='ship_ter_s_xperimental_01_a_macro']/properties/storage/@missile">80</replace>
+
+</diff>

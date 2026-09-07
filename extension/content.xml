@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<content id="drjele_xperimental_shuttle_missiles"
+         name="Experimental Shuttle Missiles"
+         description="Gives the Experimental Shuttle a second missile launcher, mirrored onto the side that has none, and a missile magazine of its own. Two mounts and a magazine of 80 come to 100 missiles, against the 10 it carries in the stock game. No change to the ship model. Works on an existing savegame."
+         author="drjele"
+         version="100"
+         date="2026-09-07"
+         save="0"
+>
+    <text language="44"
+          name="Experimental Shuttle Missiles"
+          description="Gives the Experimental Shuttle a second missile launcher, mirrored onto the side that has none, and a missile magazine of its own. Two mounts and a magazine of 80 come to 100 missiles, against the 10 it carries in the stock game. No change to the ship model. Works on an existing savegame."
+    />
+    <dependency version="900"/>
+    <dependency id="ego_dlc_timelines" name="X4: Timelines" comment="the ship only exists in this DLC, so the mod does nothing without it"/>
+</content>
