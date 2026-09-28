@@ -140,7 +140,7 @@ The launcher on the second mount sits on a connection that exists only while thi
 A load without the mod happens more easily than it sounds:
 
 - the mod disabled in the Extensions menu, or uninstalled;
-- the switch from a manual installation to the Workshop subscription. The Workshop download lands in the same `extensions/<extension-id>` folder as `install.sh` uses, replacing the manual copy, and the extension id in the downloaded manifest becomes `ws_<workshop-id>`. A start in between, with the folder gone or the new id not yet enabled, is a load without the mod.
+- the switch from a manual installation to the Workshop subscription. The Workshop download lands in `extensions/<extension-id>`, the folder `install.sh` uses, when that folder is free, and in `extensions/ws_<workshop-id>` when it is not; either way the extension id in the downloaded manifest is `ws_<workshop-id>`, and a manual copy left next to it makes X4 report the location as already used. A start in between, with the folder gone or the new id not yet enabled, is a load without the mod.
 
 The symptom afterwards is a ship that fires one missile at a time and a wharf that shows the second slot empty. To recover, dock at any wharf and fit a launcher into the second slot again. The missiles are already on board.
 
@@ -159,7 +159,7 @@ Use `publish` once, then `update` with a change note. `X4_PATH`,
 `X_TOOLS_PATH` and `PROTON_PATH` override automatic discovery. The staging location must contain an `extensions` directory.
 
 The first upload records the numeric id in `steam/workshop-id`; retain that file for future updates. The readable id in the repository's `content.xml`
-stays unchanged. After publishing, open the printed Workshop URL, complete any required Steam agreement and choose the item's visibility. Avoid keeping both the manual installation and a subscription to the same mod enabled. The Workshop download replaces the manual copy in the same folder and changes the extension id, so make the switch and enable the new id before loading a savegame again — a load in between costs the ship its second launcher, see [above](#if-the-second-launcher-disappears).
+stays unchanged. After publishing, open the printed Workshop URL, complete any required Steam agreement and choose the item's visibility. Publishing removes the manual installation and leaves nothing behind: the subscription supplies the local copy, under the Workshop id. Enable that id before loading a savegame again — a load in between costs the ship its second launcher, see [above](#if-the-second-launcher-disappears). `./install.sh` is for testing an unpublished change; remove it with `./install.sh --uninstall` before the next game start with the subscription active, or X4 reports the location as already used.
 
 Update the manifest version and release date together with `CHANGELOG.md`
 when releasing. See [Development](DEVELOPMENT.md) for staging, platform and release conventions.

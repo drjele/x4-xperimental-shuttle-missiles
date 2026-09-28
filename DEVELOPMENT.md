@@ -22,7 +22,7 @@ and `PROTON_PATH` override discovery. Proton Experimental is preferred when foun
 
 Installation replaces the extension directory with a copy of `extension/`. Refresh it after edits; X4 enumerates real extension directories, so a symlink does not substitute for installation. Restart the game after installing or removing.
 
-Publishing stages a separate copy inside the game's extensions directory. The repository keeps its readable extension id; `steam/workshop-id` holds the numeric Workshop id. The helper changes only the staged manifest, runs the interactive WorkshopTool and restores the manual installation after success. On Linux it runs WorkshopTool through Proton and maps paths through drive Z. A failed upload can leave the staged copy behind; rerun `./install.sh` to restore it.
+Publishing stages a separate copy inside the game's extensions directory. The repository keeps its readable extension id; `steam/workshop-id` holds the numeric Workshop id. The helper changes only the staged manifest, runs WorkshopTool and removes the staged copy on exit, success or failure. It does not restore a manual installation, and removes one it finds in the way: the staged copy carries the Workshop id, and X4 refuses two extensions at one location, so the subscription alone supplies the local copy after publishing. On Linux it runs WorkshopTool through Proton and maps paths through drive Z.
 
 ## Release metadata
 

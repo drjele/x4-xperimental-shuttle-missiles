@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Changed
+
+- `publish.sh` no longer reinstalls the manual copy after an upload. The staged copy is removed on exit, success or failure, and the Workshop subscription supplies the local copy. A manual copy next to the subscription made X4 report the location as already used by another extension.
+
 ## [v1.1.0] - 2026-09-28 - Verified in game, savegame warning
 
 ### Changed

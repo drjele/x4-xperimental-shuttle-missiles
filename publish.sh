@@ -127,13 +127,15 @@ echo "game:  $GAME_PATH"
 echo "tool:  $TOOL"
 echo "stage: $STAGE"
 
-# whatever happens from here on, the local install must not be left holding the
-# staged copy with the Workshop id in it
-restore_local_install() {
-    "$REPO_ROOT/install.sh" >/dev/null && echo "local install restored to id=$EXTENSION_ID"
+# the staged copy carries the Workshop id, so whatever happens from here on it
+# must not stay in the extensions directory next to the Workshop download of the
+# same item; the subscription, not this script, supplies the local copy
+remove_stage() {
+    rm -rf -- "$STAGE" && echo "staged copy removed - the Workshop subscription supplies the local copy"
 }
-trap restore_local_install EXIT
+trap remove_stage EXIT
 
+[[ -d "$STAGE" ]] && echo "removing the manual installation at $STAGE"
 rm -rf -- "$STAGE"
 mkdir -p -- "$STAGE"
 cp -r -- "$REPO_ROOT/extension/." "$STAGE/"
