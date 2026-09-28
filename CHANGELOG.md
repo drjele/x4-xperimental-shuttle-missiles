@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [v1.1.0] - 2026-09-28 - Verified in game, savegame warning
 
 ### Changed
 
@@ -42,4 +42,5 @@ All notable changes to this project will be documented in this file.
 - Requires the Timelines DLC, which is where the ship exists.
 - Both patches are filed under `extensions/ego_dlc_timelines/` inside the extension, mirroring the path `index/components.xml` and `index/macros.xml` resolve to. A patch at the plain `assets/...` path targets a base-game file that does not exist for a DLC-only ship, and is silently applied to nothing.
 
+[v1.1.0]: https://github.com/drjele/x4-xperimental-shuttle-missiles/releases/tag/v1.1.0
 [v1.0.0]: https://github.com/drjele/x4-xperimental-shuttle-missiles/releases/tag/v1.0.0
