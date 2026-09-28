@@ -52,6 +52,10 @@ This value cannot be exposed as an in-game option, and that is a property of the
 
 Macros are re-read on every savegame load, so editing the number and reloading is enough - no new game, and it reaches ships that already exist.
 
+### extension/content.xml
+
+save="1" so that the mod is recorded in the savegame. Only extensions with save="1" appear in the &lt;patches&gt; list of a savegame's header, checked against savegames from 9.00 build 611726 on 2026-09-27: the DLCs and two other mods with save="1" are listed, every save="0" extension is not. A listed extension that is missing at load makes the game show its missing-extension warning; the savegame still loads. The warning matters because a load without the mod silently drops the launcher on con_missilelauncher_02 - the connection does not exist without the component patch, so the component saved on it is discarded, while the missiles in the ship's own magazine survive. That happened once, on the switch from the manual installation to the Workshop copy, which lands in the same folder and changes the extension id. No log line records it; the savegame is the only evidence.
+
 ### Verifying the patches offline
 
 Neither patch can be checked by scripts/check.py, which only tests XML well-formedness. What matters for a diff is whether its selector matches, so apply both against the shipped files before shipping: extract assets/units/size_s/ship_ter_s_xperimental_01.xml and assets/units/size_s/macros/ship_ter_s_xperimental_01_a_macro.xml from ego_dlc_timelines/ext_01.cat, run each &lt;add&gt; and &lt;replace&gt; selector with lxml, and assert exactly one match. Note that this only proves the selectors are right - it says nothing about whether the patch is filed at the path the game resolves, which is the other half and the one that failed first time. Both matched one node each against 9.00 build 611726. In game the same failure shows up as an XPath-matched-nothing line in the debug log at startup.

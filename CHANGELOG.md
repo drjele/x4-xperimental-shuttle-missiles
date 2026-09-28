@@ -6,7 +6,8 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- Detailed Steam Workshop description, covering every setting, where to change it, and the required and optional dependencies.
+- `save="1"` in the manifest. The mod is recorded in the savegame, so the game warns before loading one without it. The savegame still loads without the mod; without the warning a load with the mod disabled, uninstalled or mid-switch to the Workshop copy silently cost the ship its second launcher.
+- Detailed Steam Workshop description, covering every setting, where to change it, and the required and optional dependencies, and a note on the launcher lost to a load without the mod and how to fit it again.
 - Extension id shortened to `drjele_xperimental_missiles`. The Steam Workshop allows at most 32 characters for a folder name and the old id was 35.
 
 ### Added
@@ -20,6 +21,12 @@ All notable changes to this project will be documented in this file.
 - `publish.sh` shows the tool's output, which Proton otherwise discards, and reads success or failure out of it rather than out of an exit code Proton does not pass on.
 - `publish.sh` restores the local installation even when the upload fails, instead of leaving it holding the staged copy with the Workshop id in it.
 - `publish.sh update` sends the preview image too, so a refreshed `extension/preview.jpg` reaches the Workshop item instead of leaving the one from the first upload in place.
+
+### Notes
+
+- Verified in a running game, 9.00 build 611726: a ship that already existed in the savegame picks up the second mount, a launcher fitted into it is saved on `con_missilelauncher_02`, and both launchers fire in the same volley.
+- Nothing is visible on either side, in vanilla too: the mk1 small launchers share the component `weapon_gen_s_missile_01`, which has no mesh.
+- A load without the mod silently drops the launcher on the second mount and keeps the missiles. Recovery is a wharf visit: the second slot is empty again, fit a launcher into it.
 
 ## [v1.0.0] - 2026-09-07 - Initial release
 

@@ -119,13 +119,32 @@ The log lands next to your savegames: `$HOME/.config/EgoSoft/X4/<userid>/debuglo
 
 This mod runs no scripts and so says nothing. What it can report is a patch that failed to apply: X4 prints an XPath that matched nothing at startup, by file and selector, so `grep -i drjele debuglog.txt` after a start is the check that both patches landed. Silence means they did.
 
+A launcher dropped by a load without the mod leaves no line in the log either. The savegame is the only record: the ship's `<connection connection="con_missilelauncher_02">` is simply gone.
+
 ## Status
 
 Both selectors verified against the shipped 9.00 files by applying the patches offline: each matches exactly one node, and the result is two mirrored mounts plus a magazine of 80.
 
-**Not yet verified in a running game.** The first attempt shipped both patches at the plain `assets/...` path and did nothing at all, silently — see the section above; they now sit under `extensions/ego_dlc_timelines/`, which is the path the index actually resolves to.
+**Verified in a running game**, on 9.00 build 611726, with a ship that already existed in the savegame:
 
-The open questions are whether a ship that already exists in a savegame picks up a connection that was not there when it was saved, and whether the launcher's own model looks right mirrored onto the other side.
+- The existing ship picks up the second mount on load. The wharf shows two missile slots, and a launcher fitted into the second one is saved on `con_missilelauncher_02`.
+- Both launchers fire in the same volley. In the savegame both carry the same `lastshottime`.
+- There is nothing to see on either side, and that is vanilla too. The mk1 small launchers (`weapon_gen_s_guided_02_mk1`, `_dumbfire_02_mk1`, `_torpedo_02_mk1`) all use the component `weapon_gen_s_missile_01`, which has no `<parts>` and no mesh. The only visible sign of a launcher is the slot marker in the ship configuration menu.
+
+The first attempt shipped both patches at the plain `assets/...` path and did nothing at all, silently — see the section above; they now sit under `extensions/ego_dlc_timelines/`, which is the path the index actually resolves to.
+
+## If the second launcher disappears
+
+The launcher on the second mount sits on a connection that exists only while this mod is loaded. Load the savegame once without the mod and the game finds no `con_missilelauncher_02` on the ship, drops the launcher that was on it, and says nothing. The missiles stay: the magazine is a number on the ship, not on the launcher. The first launcher and everything else are untouched.
+
+A load without the mod happens more easily than it sounds:
+
+- the mod disabled in the Extensions menu, or uninstalled;
+- the switch from a manual installation to the Workshop subscription. The Workshop download lands in the same `extensions/<extension-id>` folder as `install.sh` uses, replacing the manual copy, and the extension id in the downloaded manifest becomes `ws_<workshop-id>`. A start in between, with the folder gone or the new id not yet enabled, is a load without the mod.
+
+The symptom afterwards is a ship that fires one missile at a time and a wharf that shows the second slot empty. To recover, dock at any wharf and fit a launcher into the second slot again. The missiles are already on board.
+
+The mod is recorded in the savegame (`save="1"` in `content.xml`), so a load without it shows the game's standard warning about a missing extension. The savegame still loads without the mod; the warning is the only thing that changes.
 
 ## Publishing to the Steam Workshop
 
@@ -140,7 +159,7 @@ Use `publish` once, then `update` with a change note. `X4_PATH`,
 `X_TOOLS_PATH` and `PROTON_PATH` override automatic discovery. The staging location must contain an `extensions` directory.
 
 The first upload records the numeric id in `steam/workshop-id`; retain that file for future updates. The readable id in the repository's `content.xml`
-stays unchanged. After publishing, open the printed Workshop URL, complete any required Steam agreement and choose the item's visibility. Avoid keeping both the manual installation and a subscription to the same mod enabled.
+stays unchanged. After publishing, open the printed Workshop URL, complete any required Steam agreement and choose the item's visibility. Avoid keeping both the manual installation and a subscription to the same mod enabled. The Workshop download replaces the manual copy in the same folder and changes the extension id, so make the switch and enable the new id before loading a savegame again — a load in between costs the ship its second launcher, see [above](#if-the-second-launcher-disappears).
 
 Update the manifest version and release date together with `CHANGELOG.md`
 when releasing. See [Development](DEVELOPMENT.md) for staging, platform and release conventions.
